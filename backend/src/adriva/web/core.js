@@ -1,0 +1,24 @@
+export const state={project:'',workspace:null,page:'overview',fixtures:false,language:'',task:'',release:'',search:'',offset:0,loadedAt:0,sequence:0};
+export const esc=value=>String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+export const short=value=>String(value??'').slice(0,8);
+export const human=value=>String(value??'').replaceAll('_',' ').toLowerCase().replace(/^./,x=>x.toUpperCase());
+export const badge=(value,tone='')=>`<span class="badge ${tone}">${esc(human(value))}</span>`;
+export const pct=value=>value==null?'—':`${(Number(value)*100).toFixed(1)}%`;
+export const button=(label,action,kind='',extra='')=>`<button class="button ${kind}" data-action="${action}" ${extra}>${label}</button>`;
+export const empty=(title,description,action='')=>`<div class="empty"><span class="empty-mark" aria-hidden="true">◇</span><h3>${esc(title)}</h3><p>${esc(description)}</p>${action}</div>`;
+export const panel=(title,description,content,action='')=>`<section class="panel"><div class="panel-head"><div><h2>${esc(title)}</h2>${description?`<p>${esc(description)}</p>`:''}</div>${action}</div>${content}</section>`;
+export const metric=(label,value,note)=>`<div class="metric-card"><div class="metric-label">${esc(label)}</div><div class="metric-number">${esc(value)}</div><div class="metric-note">${esc(note)}</div></div>`;
+export function table(headers,rows){return `<div class="table-wrap"><table><thead><tr>${headers.map(h=>`<th scope="col">${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.join('')}</tbody></table></div>`}
+export const field=(label,name,type='text',value='',hint='')=>`<label class="field">${esc(label)}<input name="${name}" type="${type}" value="${esc(value)}" required>${hint?`<small>${esc(hint)}</small>`:''}</label>`;
+export const selectField=(label,name,options)=>`<label class="field">${esc(label)}<select name="${name}" required><option value="">Choose…</option>${options}</select></label>`;
+export const options=(rows,key,label,selected='')=>rows.map(r=>`<option value="${esc(r[key])}" ${String(r[key])===selected?'selected':''}>${esc(typeof label==='function'?label(r):r[label])}</option>`).join('');
+export const query=params=>new URLSearchParams(Object.entries(params).filter(([,v])=>v!==''&&v!==null&&v!==undefined)).toString();
+export const root=()=>`/api/v1/projects/${state.project}`;
+export async function api(path,options={}){const response=await fetch(path,{...options,headers:{'Content-Type':'application/json',...options.headers}});let data;try{data=await response.json()}catch{throw new Error(`Server returned ${response.status}; refresh or check System Health.`)}if(!response.ok)throw new Error(data.error?.message||`Request failed (${response.status})`);return data}
+export const post=(path,data)=>api(path,{method:'POST',body:JSON.stringify(data)});
+export function toast(message){const el=document.querySelector('#toast');el.textContent=message;el.style.display='block';clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.style.display='none',5000)}
+export function modal(title,content,narrow=true){document.querySelector('#dialog-title').textContent=title;document.querySelector('#dialog-body').innerHTML=content;const dialog=document.querySelector('#dialog');dialog.classList.toggle('narrow',narrow);if(!dialog.open)dialog.showModal()}
+export const jsonDetails=(title,data)=>`<details><summary>${esc(title)}</summary><pre>${esc(JSON.stringify(data,null,2))}</pre></details>`;
+export const runOptions=()=>options(state.workspace.runs,'id',r=>`${r.requested_model} / ${r.model_version} · ${short(r.id)} · ${human(r.state)}`);
+export const languageName=value=>({'en':'English','ml':'Malayalam','manglish':'Manglish','code-switch':'Code-switch'}[value]||value);
+export function filters({cases=false,release=false}={}){return `<div class="filterbar"><label><input id="fixture-toggle" type="checkbox" ${state.fixtures?'checked':''}> Include engineering fixtures</label>${cases?`<select id="language-filter" aria-label="Language"><option value="">All language modes</option>${['en','ml','manglish','code-switch'].map(v=>`<option value="${v}" ${state.language===v?'selected':''}>${languageName(v)}</option>`).join('')}</select><select id="task-filter" aria-label="Task"><option value="">All tasks</option>${['GROUNDED_QA','EXTRACTION','TRANSLATION','SUMMARIZATION','INSTRUCTION','REASONING'].map(v=>`<option ${state.task===v?'selected':''} value="${v}">${human(v)}</option>`).join('')}</select>`:''}${release?`<select id="release-filter" aria-label="Benchmark version"><option value="">All benchmark versions</option>${options(state.workspace.releases,'id',r=>`${r.name} · ${r.version}`,state.release)}</select>`:''}<span class="scope">${state.fixtures?'Fixtures included · not research results':'Fixtures excluded from scientific views'}</span></div>`}

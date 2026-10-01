@@ -1,0 +1,9 @@
+{
+  "pages": 10,
+  "run_inspection": true,
+  "paired_comparison": true,
+  "language_filter": true,
+  "case_inspection": true,
+  "mobile_overflow": false,
+  "page_errors": []
+}

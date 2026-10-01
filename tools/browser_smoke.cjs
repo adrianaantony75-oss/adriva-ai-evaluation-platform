@@ -1,0 +1,57 @@
+// Headless browser validation. Set PLAYWRIGHT_MODULE to a locally installed package if needed.
+const {chromium} = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const fs = require('fs');
+(async()=>{
+ const browser=await chromium.launch({executablePath:process.env.ADRIVA_BROWSER || 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});
+ const page=await browser.newPage({viewport:{width:1440,height:1050}});
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto(process.env.ADRIVA_URL || 'http://127.0.0.1:8019');
+ await page.locator('#project option').filter({hasText:'Engineering verification'}).waitFor({state:'attached'});
+ await page.selectOption('#project',{label:'Engineering verification'});
+ await page.locator('h1').waitFor();
+ fs.mkdirSync('.local/screenshots',{recursive:true});
+ const pages=['overview','models','benchmarks','regression','languages','failures','human','annotation','quality','health'];
+ for(const id of pages){
+   await page.locator(`a[data-page="${id}"]`).click();
+   await page.waitForFunction(id=>document.querySelector('.nav-link.active')?.dataset.page===id && !!document.querySelector('#main h1'),id);
+   await page.waitForFunction(()=>!document.querySelector('#main').hasAttribute('aria-busy'));
+   if(await page.locator('#fixture-toggle').count()) await page.locator('#fixture-toggle').check();
+   await page.waitForFunction(()=>!document.querySelector('#main').hasAttribute('aria-busy'));
+   if(await page.locator('.error-banner').count()) throw Error(`Error banner on ${id}`);
+   await page.screenshot({path:`.local/screenshots/${id}.png`,fullPage:true});
+ }
+ await page.locator('a[data-page="models"]').click();
+ await page.locator('[data-action="run-detail"]').first().click();
+ await page.locator('#dialog[open]').waitFor();
+ if(!(await page.locator('#dialog-body').innerText()).includes('Metric coverage')) throw Error('Run inspection missing');
+ await page.locator('#close-dialog').click();
+ await page.locator('a[data-page="regression"]').click();
+ await page.locator('#compare-form').waitFor();
+ const options=await page.locator('select[name="baseline"] option').evaluateAll(nodes=>nodes.map(n=>n.value).filter(Boolean));
+ await page.selectOption('select[name="baseline"]',options[0]);
+ await page.selectOption('select[name="candidate"]',options[1]);
+ await page.selectOption('select[name="metric"]','reference_exact_match');
+ await page.locator('#compare-form button').click();
+ await page.locator('#comparison-result .metrics').waitFor();
+ if(!(await page.locator('#comparison-result').innerText()).includes('HOLD')) throw Error('Fixture comparison made scientific decision');
+ await page.screenshot({path:'.local/screenshots/comparison.png',fullPage:true});
+ await page.locator('a[data-page="benchmarks"]').click();
+ await page.selectOption('#language-filter','ml');
+ await page.waitForFunction(()=>!document.querySelector('#main').hasAttribute('aria-busy'));
+ if(!(await page.locator('#main').innerText()).includes('6 matching')) throw Error('Malayalam filter incorrect');
+ await page.locator('[data-action="case"]').first().click();
+ await page.locator('#dialog[open]').waitFor();
+ await page.screenshot({path:'.local/screenshots/case.png',fullPage:true});
+ await page.locator('#close-dialog').click();
+ await page.setViewportSize({width:390,height:844});
+ await page.locator('a[data-page="overview"]').click();
+ await page.waitForFunction(()=>document.querySelector('#main h1')?.textContent==='Overview' && !document.querySelector('#main').hasAttribute('aria-busy'));
+ await page.waitForFunction(()=>!document.querySelector('#main').hasAttribute('aria-busy'));
+ const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);
+ if(overflow) throw Error('Mobile page overflows horizontally');
+ await page.screenshot({path:'.local/screenshots/mobile.png',fullPage:true});
+ await browser.close();
+ if(errors.length) throw Error(errors.join('\n'));
+ fs.writeFileSync('.local/browser-results.json',JSON.stringify({pages:pages.length,run_inspection:true,paired_comparison:true,language_filter:true,case_inspection:true,mobile_overflow:false,page_errors:errors},null,2));
+ console.log('PASS: 10 pages, run/case inspection, paired comparison, Malayalam filter, mobile layout; no JavaScript exceptions.');
+})().catch(e=>{console.error(e);process.exit(1)});

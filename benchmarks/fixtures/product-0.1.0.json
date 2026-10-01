@@ -1,0 +1,1108 @@
+{
+  "name": "ADRIVA-ENGINEERING",
+  "version": "0.1.0",
+  "cases": [
+    {
+      "key": "price-en",
+      "cluster_key": "price",
+      "family_key": "price",
+      "task": "GROUNDED_QA",
+      "prompt": "Return only the notebook price as digits.",
+      "context": "The fictional shop lists the notebook at 250 rupees.",
+      "input_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "output_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "expected": {
+        "accepted_answers": [
+          "250"
+        ]
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/price",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "cba74928722a6695aff82eea949d734ff60332318719f0a63bbdb95302b4a780"
+      },
+      "split": "development"
+    },
+    {
+      "key": "price-ml",
+      "cluster_key": "price",
+      "family_key": "price",
+      "task": "GROUNDED_QA",
+      "prompt": "നോട്ട്ബുക്കിന്റെ വില അക്കങ്ങളിൽ മാത്രം നൽകുക.",
+      "context": "The fictional shop lists the notebook at 250 rupees.",
+      "input_profile": {
+        "languages": [
+          "ml"
+        ],
+        "script": "Malayalam"
+      },
+      "output_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "expected": {
+        "accepted_answers": [
+          "250"
+        ]
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/price",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "de21c7a599b8baf4024898a3ad6df54c77265228e46c78293adffa0c7dd1852f"
+      },
+      "split": "development",
+      "derivation": {
+        "parent_key": "price-en",
+        "operator_version": "authored-ml-0.1",
+        "relation": "INVARIANT",
+        "invariant": "Same intended task and constraints; human verification pending"
+      }
+    },
+    {
+      "key": "price-manglish",
+      "cluster_key": "price",
+      "family_key": "price",
+      "task": "GROUNDED_QA",
+      "prompt": "Notebookinte vila akkangalil mathram tharuka.",
+      "context": "The fictional shop lists the notebook at 250 rupees.",
+      "input_profile": {
+        "languages": [
+          "ml"
+        ],
+        "script": "Latin",
+        "romanization": "informal-Manglish"
+      },
+      "output_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "expected": {
+        "accepted_answers": [
+          "250"
+        ]
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/price",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "584ab74d00ab61415cdad4f572d950292fb6951d42801aa7f7c92af84224b257"
+      },
+      "split": "development",
+      "derivation": {
+        "parent_key": "price-en",
+        "operator_version": "authored-manglish-0.1",
+        "relation": "INVARIANT",
+        "invariant": "Same intended task and constraints; human verification pending"
+      }
+    },
+    {
+      "key": "price-mixed",
+      "cluster_key": "price",
+      "family_key": "price",
+      "task": "GROUNDED_QA",
+      "prompt": "നോട്ട്ബുക്കിന്റെ price digits ആയി മാത്രം നൽകുക.",
+      "context": "The fictional shop lists the notebook at 250 rupees.",
+      "input_profile": {
+        "languages": [
+          "ml",
+          "en"
+        ],
+        "script": "mixed",
+        "mixing": "within_sentence"
+      },
+      "output_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "expected": {
+        "accepted_answers": [
+          "250"
+        ]
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/price",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "0412d2caa8ade5d6c76d37c328f7194b3ab78f43c0bf1598fd408c3c5bf9490b"
+      },
+      "split": "development",
+      "derivation": {
+        "parent_key": "price-en",
+        "operator_version": "authored-mixed-0.1",
+        "relation": "INVARIANT",
+        "invariant": "Same intended task and constraints; human verification pending"
+      }
+    },
+    {
+      "key": "order-en",
+      "cluster_key": "order",
+      "family_key": "order",
+      "task": "EXTRACTION",
+      "prompt": "Extract item and quantity as a JSON object, with no extra keys.",
+      "context": "Fictional order: item=pen; quantity=3.",
+      "input_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "output_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "expected": {
+        "json_schema": {
+          "type": "object",
+          "properties": {
+            "item": {
+              "type": "string"
+            },
+            "quantity": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "item",
+            "quantity"
+          ],
+          "additionalProperties": false
+        },
+        "expected_fields": {
+          "item": "pen",
+          "quantity": 3
+        }
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/order",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "0724a4da4b960b443d52b9bb98114de33b9836b8e6797c14431a2f7c2162e4d5"
+      },
+      "split": "development"
+    },
+    {
+      "key": "order-ml",
+      "cluster_key": "order",
+      "family_key": "order",
+      "task": "EXTRACTION",
+      "prompt": "സാധനവും എണ്ണവും item, quantity എന്നീ കീകളുള്ള JSON ആയി നൽകുക. മറ്റ് കീകൾ വേണ്ട.",
+      "context": "Fictional order: item=pen; quantity=3.",
+      "input_profile": {
+        "languages": [
+          "ml"
+        ],
+        "script": "Malayalam"
+      },
+      "output_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "expected": {
+        "json_schema": {
+          "type": "object",
+          "properties": {
+            "item": {
+              "type": "string"
+            },
+            "quantity": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "item",
+            "quantity"
+          ],
+          "additionalProperties": false
+        },
+        "expected_fields": {
+          "item": "pen",
+          "quantity": 3
+        }
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/order",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "36007c5b86a1d1f22f9c505e74ca8300b698d8a21ecd3a61540fda3cdf37cfa9"
+      },
+      "split": "development",
+      "derivation": {
+        "parent_key": "order-en",
+        "operator_version": "authored-ml-0.1",
+        "relation": "INVARIANT",
+        "invariant": "Same intended task and constraints; human verification pending"
+      }
+    },
+    {
+      "key": "order-manglish",
+      "cluster_key": "order",
+      "family_key": "order",
+      "task": "EXTRACTION",
+      "prompt": "Itemum quantityum JSON aayi tharuka. Vere keys venda.",
+      "context": "Fictional order: item=pen; quantity=3.",
+      "input_profile": {
+        "languages": [
+          "ml"
+        ],
+        "script": "Latin",
+        "romanization": "informal-Manglish"
+      },
+      "output_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "expected": {
+        "json_schema": {
+          "type": "object",
+          "properties": {
+            "item": {
+              "type": "string"
+            },
+            "quantity": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "item",
+            "quantity"
+          ],
+          "additionalProperties": false
+        },
+        "expected_fields": {
+          "item": "pen",
+          "quantity": 3
+        }
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/order",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "c827b211577873825e222dd120ba357ccb41a9ed95c6dc284b221a76a7130c95"
+      },
+      "split": "development",
+      "derivation": {
+        "parent_key": "order-en",
+        "operator_version": "authored-manglish-0.1",
+        "relation": "INVARIANT",
+        "invariant": "Same intended task and constraints; human verification pending"
+      }
+    },
+    {
+      "key": "order-mixed",
+      "cluster_key": "order",
+      "family_key": "order",
+      "task": "EXTRACTION",
+      "prompt": "item, quantity മാത്രം ഉള്ള JSON നൽകുക.",
+      "context": "Fictional order: item=pen; quantity=3.",
+      "input_profile": {
+        "languages": [
+          "ml",
+          "en"
+        ],
+        "script": "mixed",
+        "mixing": "within_sentence"
+      },
+      "output_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "expected": {
+        "json_schema": {
+          "type": "object",
+          "properties": {
+            "item": {
+              "type": "string"
+            },
+            "quantity": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "item",
+            "quantity"
+          ],
+          "additionalProperties": false
+        },
+        "expected_fields": {
+          "item": "pen",
+          "quantity": 3
+        }
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/order",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "4e8f0d392654efd65177870524b01efbf0844058a559463dc4a2953ec71bd213"
+      },
+      "split": "development",
+      "derivation": {
+        "parent_key": "order-en",
+        "operator_version": "authored-mixed-0.1",
+        "relation": "INVARIANT",
+        "invariant": "Same intended task and constraints; human verification pending"
+      }
+    },
+    {
+      "key": "translation-en",
+      "cluster_key": "translation",
+      "family_key": "translation",
+      "task": "TRANSLATION",
+      "prompt": "Translate \"Good morning\" into Malayalam.",
+      "context": "",
+      "input_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "output_profile": {
+        "languages": [
+          "ml"
+        ],
+        "script": "Malayalam"
+      },
+      "expected": {
+        "accepted_answers": [
+          "സുപ്രഭാതം",
+          "സുപ്രഭാതം."
+        ],
+        "semantic_units": [
+          "A morning greeting"
+        ]
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/translation",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "8654102190cdc23761c88a2a0ab3289777676bdc93d8c417ebeeaf3cc026b798"
+      },
+      "split": "development"
+    },
+    {
+      "key": "translation-ml",
+      "cluster_key": "translation",
+      "family_key": "translation",
+      "task": "TRANSLATION",
+      "prompt": "\"Good morning\" മലയാളത്തിലേക്ക് വിവർത്തനം ചെയ്യുക.",
+      "context": "",
+      "input_profile": {
+        "languages": [
+          "ml"
+        ],
+        "script": "Malayalam"
+      },
+      "output_profile": {
+        "languages": [
+          "ml"
+        ],
+        "script": "Malayalam"
+      },
+      "expected": {
+        "accepted_answers": [
+          "സുപ്രഭാതം",
+          "സുപ്രഭാതം."
+        ],
+        "semantic_units": [
+          "A morning greeting"
+        ]
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/translation",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "2af9c700aca77922178d30e65bf77f9f4a8843691dec027e030ba9ff6964ce40"
+      },
+      "split": "development",
+      "derivation": {
+        "parent_key": "translation-en",
+        "operator_version": "authored-ml-0.1",
+        "relation": "INVARIANT",
+        "invariant": "Same intended task and constraints; human verification pending"
+      }
+    },
+    {
+      "key": "translation-manglish",
+      "cluster_key": "translation",
+      "family_key": "translation",
+      "task": "TRANSLATION",
+      "prompt": "\"Good morning\" Malayalathilekku translate cheyyuka.",
+      "context": "",
+      "input_profile": {
+        "languages": [
+          "ml"
+        ],
+        "script": "Latin",
+        "romanization": "informal-Manglish"
+      },
+      "output_profile": {
+        "languages": [
+          "ml"
+        ],
+        "script": "Malayalam"
+      },
+      "expected": {
+        "accepted_answers": [
+          "സുപ്രഭാതം",
+          "സുപ്രഭാതം."
+        ],
+        "semantic_units": [
+          "A morning greeting"
+        ]
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/translation",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "21594714fd2033e152d559f96b6342e9d80d1c383759ab40bd3a8502662a83a4"
+      },
+      "split": "development",
+      "derivation": {
+        "parent_key": "translation-en",
+        "operator_version": "authored-manglish-0.1",
+        "relation": "INVARIANT",
+        "invariant": "Same intended task and constraints; human verification pending"
+      }
+    },
+    {
+      "key": "translation-mixed",
+      "cluster_key": "translation",
+      "family_key": "translation",
+      "task": "TRANSLATION",
+      "prompt": "\"Good morning\" മലയാളത്തിലേക്ക് translate ചെയ്യുക.",
+      "context": "",
+      "input_profile": {
+        "languages": [
+          "ml",
+          "en"
+        ],
+        "script": "mixed",
+        "mixing": "within_sentence"
+      },
+      "output_profile": {
+        "languages": [
+          "ml"
+        ],
+        "script": "Malayalam"
+      },
+      "expected": {
+        "accepted_answers": [
+          "സുപ്രഭാതം",
+          "സുപ്രഭാതം."
+        ],
+        "semantic_units": [
+          "A morning greeting"
+        ]
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/translation",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "d4d450dfd13fc55f74ad839bd16a2bffc28fb7db371cc5c4a291b3a0db8b3be8"
+      },
+      "split": "development",
+      "derivation": {
+        "parent_key": "translation-en",
+        "operator_version": "authored-mixed-0.1",
+        "relation": "INVARIANT",
+        "invariant": "Same intended task and constraints; human verification pending"
+      }
+    },
+    {
+      "key": "notice-en",
+      "cluster_key": "notice",
+      "family_key": "notice",
+      "task": "SUMMARIZATION",
+      "prompt": "Summarize in English in at most 100 characters. Retain Monday and Tuesday.",
+      "context": "A fictional library closes on Monday for repairs and reopens on Tuesday.",
+      "input_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "output_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "expected": {
+        "max_characters": 100,
+        "required_literals": [
+          "Monday",
+          "Tuesday"
+        ],
+        "semantic_units": [
+          "Library closed Monday for repairs",
+          "Library reopens Tuesday"
+        ]
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/notice",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "a683643acdeaa1b84ee764a33ab22b21c04f2be415d9803eb6a778973ec95f97"
+      },
+      "split": "development"
+    },
+    {
+      "key": "notice-ml",
+      "cluster_key": "notice",
+      "family_key": "notice",
+      "task": "SUMMARIZATION",
+      "prompt": "Monday, Tuesday എന്നീ വാക്കുകൾ ഉൾപ്പെടുത്തി ഇംഗ്ലീഷിൽ 100 അക്ഷരങ്ങളിൽ കവിയാതെ സംഗ്രഹിക്കുക.",
+      "context": "A fictional library closes on Monday for repairs and reopens on Tuesday.",
+      "input_profile": {
+        "languages": [
+          "ml"
+        ],
+        "script": "Malayalam"
+      },
+      "output_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "expected": {
+        "max_characters": 100,
+        "required_literals": [
+          "Monday",
+          "Tuesday"
+        ],
+        "semantic_units": [
+          "Library closed Monday for repairs",
+          "Library reopens Tuesday"
+        ]
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/notice",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "a8f1962bad261c6590de34da01e423e4eb521feb30b7479a2a48aaf883fdc4c0"
+      },
+      "split": "development",
+      "derivation": {
+        "parent_key": "notice-en",
+        "operator_version": "authored-ml-0.1",
+        "relation": "INVARIANT",
+        "invariant": "Same intended task and constraints; human verification pending"
+      }
+    },
+    {
+      "key": "notice-manglish",
+      "cluster_key": "notice",
+      "family_key": "notice",
+      "task": "SUMMARIZATION",
+      "prompt": "Englishil 100 charactersil kaviyathe churukki ezhuthuka. Mondayum Tuesdayum venam.",
+      "context": "A fictional library closes on Monday for repairs and reopens on Tuesday.",
+      "input_profile": {
+        "languages": [
+          "ml"
+        ],
+        "script": "Latin",
+        "romanization": "informal-Manglish"
+      },
+      "output_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "expected": {
+        "max_characters": 100,
+        "required_literals": [
+          "Monday",
+          "Tuesday"
+        ],
+        "semantic_units": [
+          "Library closed Monday for repairs",
+          "Library reopens Tuesday"
+        ]
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/notice",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "f28ef7eb5188123c1fd16e76e6366f332cdf7da672de883c8d22f464a0d8ae8d"
+      },
+      "split": "development",
+      "derivation": {
+        "parent_key": "notice-en",
+        "operator_version": "authored-manglish-0.1",
+        "relation": "INVARIANT",
+        "invariant": "Same intended task and constraints; human verification pending"
+      }
+    },
+    {
+      "key": "notice-mixed",
+      "cluster_key": "notice",
+      "family_key": "notice",
+      "task": "SUMMARIZATION",
+      "prompt": "English summary 100 charactersൽ കവിയരുത്. Monday, Tuesday ഉൾപ്പെടുത്തുക.",
+      "context": "A fictional library closes on Monday for repairs and reopens on Tuesday.",
+      "input_profile": {
+        "languages": [
+          "ml",
+          "en"
+        ],
+        "script": "mixed",
+        "mixing": "within_sentence"
+      },
+      "output_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "expected": {
+        "max_characters": 100,
+        "required_literals": [
+          "Monday",
+          "Tuesday"
+        ],
+        "semantic_units": [
+          "Library closed Monday for repairs",
+          "Library reopens Tuesday"
+        ]
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/notice",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "7bad6b799080bcce018b4621bc8dd90c964da001f076ae2001bcc975f98cd094"
+      },
+      "split": "development",
+      "derivation": {
+        "parent_key": "notice-en",
+        "operator_version": "authored-mixed-0.1",
+        "relation": "INVARIANT",
+        "invariant": "Same intended task and constraints; human verification pending"
+      }
+    },
+    {
+      "key": "format-en",
+      "cluster_key": "format",
+      "family_key": "format",
+      "task": "INSTRUCTION",
+      "prompt": "Reply with exactly READY in uppercase and nothing else.",
+      "context": "",
+      "input_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "output_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "expected": {
+        "accepted_answers": [
+          "READY"
+        ],
+        "max_characters": 5
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/format",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "080f63aeded1d21f433f6ea1033f33c569a0687135c514d21f802b8a1e0a99c0"
+      },
+      "split": "development"
+    },
+    {
+      "key": "format-ml",
+      "cluster_key": "format",
+      "family_key": "format",
+      "task": "INSTRUCTION",
+      "prompt": "READY എന്ന് വലിയ ഇംഗ്ലീഷ് അക്ഷരങ്ങളിൽ മാത്രം മറുപടി നൽകുക.",
+      "context": "",
+      "input_profile": {
+        "languages": [
+          "ml"
+        ],
+        "script": "Malayalam"
+      },
+      "output_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "expected": {
+        "accepted_answers": [
+          "READY"
+        ],
+        "max_characters": 5
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/format",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "d608171058c9901b8b99e6475ebe11c1042db630e697de6c98d406b7fa1ef569"
+      },
+      "split": "development",
+      "derivation": {
+        "parent_key": "format-en",
+        "operator_version": "authored-ml-0.1",
+        "relation": "INVARIANT",
+        "invariant": "Same intended task and constraints; human verification pending"
+      }
+    },
+    {
+      "key": "format-manglish",
+      "cluster_key": "format",
+      "family_key": "format",
+      "task": "INSTRUCTION",
+      "prompt": "READY ennu capital lettersil mathram marupadi tharuka.",
+      "context": "",
+      "input_profile": {
+        "languages": [
+          "ml"
+        ],
+        "script": "Latin",
+        "romanization": "informal-Manglish"
+      },
+      "output_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "expected": {
+        "accepted_answers": [
+          "READY"
+        ],
+        "max_characters": 5
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/format",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "94c3ee3b40fc7442432a2c842d5b257d5bcdc87aeb44caae9cbc0eff648eff27"
+      },
+      "split": "development",
+      "derivation": {
+        "parent_key": "format-en",
+        "operator_version": "authored-manglish-0.1",
+        "relation": "INVARIANT",
+        "invariant": "Same intended task and constraints; human verification pending"
+      }
+    },
+    {
+      "key": "format-mixed",
+      "cluster_key": "format",
+      "family_key": "format",
+      "task": "INSTRUCTION",
+      "prompt": "READY മാത്രം reply ചെയ്യുക; uppercase വേണം.",
+      "context": "",
+      "input_profile": {
+        "languages": [
+          "ml",
+          "en"
+        ],
+        "script": "mixed",
+        "mixing": "within_sentence"
+      },
+      "output_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "expected": {
+        "accepted_answers": [
+          "READY"
+        ],
+        "max_characters": 5
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/format",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "2706a4edd42ca35b5c6ae63a2ed77f38ffed9228b585e0067f27b373223fe8b1"
+      },
+      "split": "development",
+      "derivation": {
+        "parent_key": "format-en",
+        "operator_version": "authored-mixed-0.1",
+        "relation": "INVARIANT",
+        "invariant": "Same intended task and constraints; human verification pending"
+      }
+    },
+    {
+      "key": "addition-en",
+      "cluster_key": "addition",
+      "family_key": "addition",
+      "task": "REASONING",
+      "prompt": "There are 7 red balls and 5 blue balls. How many balls total? Return digits only.",
+      "context": "",
+      "input_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "output_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "expected": {
+        "accepted_answers": [
+          "12"
+        ]
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/addition",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "d76d6cc7246c236b231f0db3d36fd6468f38e46f274c80d1e32700be34118e76"
+      },
+      "split": "development"
+    },
+    {
+      "key": "addition-ml",
+      "cluster_key": "addition",
+      "family_key": "addition",
+      "task": "REASONING",
+      "prompt": "7 ചുവന്ന പന്തുകളും 5 നീല പന്തുകളും ഉണ്ട്. ആകെ എത്ര പന്തുകൾ? അക്കങ്ങളിൽ മാത്രം മറുപടി നൽകുക.",
+      "context": "",
+      "input_profile": {
+        "languages": [
+          "ml"
+        ],
+        "script": "Malayalam"
+      },
+      "output_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "expected": {
+        "accepted_answers": [
+          "12"
+        ]
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/addition",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "1557f56622d28d082374815164bda800b50f9629ff6e08ca0d364b962f678e92"
+      },
+      "split": "development",
+      "derivation": {
+        "parent_key": "addition-en",
+        "operator_version": "authored-ml-0.1",
+        "relation": "INVARIANT",
+        "invariant": "Same intended task and constraints; human verification pending"
+      }
+    },
+    {
+      "key": "addition-manglish",
+      "cluster_key": "addition",
+      "family_key": "addition",
+      "task": "REASONING",
+      "prompt": "7 chuvanna panthukalum 5 neela panthukalum undu. Aake ethra? Akkangal mathram tharuka.",
+      "context": "",
+      "input_profile": {
+        "languages": [
+          "ml"
+        ],
+        "script": "Latin",
+        "romanization": "informal-Manglish"
+      },
+      "output_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "expected": {
+        "accepted_answers": [
+          "12"
+        ]
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/addition",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "b8cb7c88617cfb77b723106dccd784e8871f846c68ddbf61c5adf745bb6b8e4c"
+      },
+      "split": "development",
+      "derivation": {
+        "parent_key": "addition-en",
+        "operator_version": "authored-manglish-0.1",
+        "relation": "INVARIANT",
+        "invariant": "Same intended task and constraints; human verification pending"
+      }
+    },
+    {
+      "key": "addition-mixed",
+      "cluster_key": "addition",
+      "family_key": "addition",
+      "task": "REASONING",
+      "prompt": "7 red പന്തുകളും 5 blue പന്തുകളും ഉണ്ട്. Total എത്ര? Digits മാത്രം നൽകുക.",
+      "context": "",
+      "input_profile": {
+        "languages": [
+          "ml",
+          "en"
+        ],
+        "script": "mixed",
+        "mixing": "within_sentence"
+      },
+      "output_profile": {
+        "languages": [
+          "en"
+        ],
+        "script": "Latin"
+      },
+      "expected": {
+        "accepted_answers": [
+          "12"
+        ]
+      },
+      "usage": "FIXTURE",
+      "origin": "SYNTHETIC",
+      "source_uri": "fixture://authored-seed/0.1.0/addition",
+      "license": "Project-authored synthetic examples; no external dataset content",
+      "creator_ref": "AI-assisted authoring; no human certification",
+      "generator_metadata": {
+        "generator": "ChatGPT Codex session",
+        "version": "2026-10-01; exact model build unavailable",
+        "prompt_digest": "a85b94233e0520e51d505488d4a63bf97dbf84d382958fbe5c0f5a45dd2587a9"
+      },
+      "split": "development",
+      "derivation": {
+        "parent_key": "addition-en",
+        "operator_version": "authored-mixed-0.1",
+        "relation": "INVARIANT",
+        "invariant": "Same intended task and constraints; human verification pending"
+      }
+    }
+  ]
+}

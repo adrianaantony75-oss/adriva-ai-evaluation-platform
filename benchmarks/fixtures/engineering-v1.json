@@ -1,0 +1,49 @@
+{
+  "name": "ENGINEERING-FIXTURE-BENCH",
+  "version": "1.0.0",
+  "cases": [
+    {
+      "key": "qa-en", "cluster_key": "fictional-price", "family_key": "price-qa",
+      "task": "GROUNDED_QA", "prompt": "Return only the price as digits.",
+      "context": "A fictional product costs 250 rupees.",
+      "input_profile": {"languages": ["en"], "script": "Latin", "register": "formal"},
+      "output_profile": {"languages": ["en"], "script": "Latin"},
+      "expected": {"accepted_answers": ["250"]}, "usage": "FIXTURE", "origin": "SYNTHETIC",
+      "source_uri": "fixture://fictional-price-v1", "license": "Project-authored engineering fixture",
+      "split": "development"
+    },
+    {
+      "key": "qa-ml", "cluster_key": "fictional-price", "family_key": "price-qa",
+      "task": "GROUNDED_QA", "prompt": "വില അക്കങ്ങളിൽ മാത്രം നൽകുക.",
+      "context": "A fictional product costs 250 rupees.",
+      "input_profile": {"languages": ["ml"], "script": "Malayalam", "register": "formal"},
+      "output_profile": {"languages": ["en"], "script": "Latin"},
+      "expected": {"accepted_answers": ["250"]}, "usage": "FIXTURE", "origin": "SYNTHETIC",
+      "source_uri": "fixture://fictional-price-v1", "license": "Project-authored engineering fixture",
+      "derivation": {"parent_key": "qa-en", "operator_version": "fixture-translation-v1", "relation": "INVARIANT", "invariant": "Return the same required price"},
+      "split": "development"
+    },
+    {
+      "key": "qa-manglish", "cluster_key": "fictional-price", "family_key": "price-qa",
+      "task": "GROUNDED_QA", "prompt": "Vila akkangalil mathram tharuka.",
+      "context": "A fictional product costs 250 rupees.",
+      "input_profile": {"languages": ["ml"], "script": "Latin", "register": "conversational", "romanization": "informal-Manglish"},
+      "output_profile": {"languages": ["en"], "script": "Latin"},
+      "expected": {"accepted_answers": ["250"]}, "usage": "FIXTURE", "origin": "SYNTHETIC",
+      "source_uri": "fixture://fictional-price-v1", "license": "Project-authored engineering fixture",
+      "derivation": {"parent_key": "qa-ml", "operator_version": "fixture-romanization-v1", "relation": "INVARIANT", "invariant": "Return the same required price"},
+      "split": "development"
+    },
+    {
+      "key": "qa-mixed", "cluster_key": "fictional-price", "family_key": "price-qa",
+      "task": "GROUNDED_QA", "prompt": "വില digits മാത്രം return ചെയ്യൂ.",
+      "context": "A fictional product costs 250 rupees.",
+      "input_profile": {"languages": ["ml", "en"], "script": "mixed", "register": "conversational", "mixing": "within_sentence"},
+      "output_profile": {"languages": ["en"], "script": "Latin"},
+      "expected": {"accepted_answers": ["250"]}, "usage": "FIXTURE", "origin": "SYNTHETIC",
+      "source_uri": "fixture://fictional-price-v1", "license": "Project-authored engineering fixture",
+      "derivation": {"parent_key": "qa-ml", "operator_version": "fixture-code-switch-v1", "relation": "INVARIANT", "invariant": "Return the same required price"},
+      "split": "development"
+    }
+  ]
+}

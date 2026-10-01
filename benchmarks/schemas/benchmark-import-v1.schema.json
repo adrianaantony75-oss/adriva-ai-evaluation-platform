@@ -1,0 +1,423 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "CaseInput": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Key",
+          "type": "string"
+        },
+        "cluster_key": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Cluster Key",
+          "type": "string"
+        },
+        "family_key": {
+          "maxLength": 128,
+          "minLength": 1,
+          "title": "Family Key",
+          "type": "string"
+        },
+        "revision": {
+          "default": 1,
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "task": {
+          "enum": [
+            "GROUNDED_QA",
+            "EXTRACTION",
+            "TRANSLATION",
+            "SUMMARIZATION",
+            "INSTRUCTION",
+            "REASONING"
+          ],
+          "title": "Task",
+          "type": "string"
+        },
+        "prompt": {
+          "maxLength": 20000,
+          "minLength": 1,
+          "title": "Prompt",
+          "type": "string"
+        },
+        "context": {
+          "default": "",
+          "maxLength": 100000,
+          "title": "Context",
+          "type": "string"
+        },
+        "input_profile": {
+          "$ref": "#/$defs/LanguageProfile"
+        },
+        "output_profile": {
+          "$ref": "#/$defs/LanguageProfile"
+        },
+        "expected": {
+          "$ref": "#/$defs/ExpectedContract"
+        },
+        "usage": {
+          "enum": [
+            "FIXTURE",
+            "PILOT",
+            "EVALUATION"
+          ],
+          "title": "Usage",
+          "type": "string"
+        },
+        "origin": {
+          "enum": [
+            "HUMAN_CREATED",
+            "SYNTHETIC",
+            "PUBLIC_DATASET"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "source_uri": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Source Uri",
+          "type": "string"
+        },
+        "license": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "License",
+          "type": "string"
+        },
+        "source_revision": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Revision"
+        },
+        "source_item_key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Item Key"
+        },
+        "permission_note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Permission Note"
+        },
+        "sensitivity": {
+          "default": "PUBLIC",
+          "enum": [
+            "PUBLIC",
+            "INTERNAL",
+            "SENSITIVE"
+          ],
+          "title": "Sensitivity",
+          "type": "string"
+        },
+        "creator_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Creator Ref"
+        },
+        "generator_metadata": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Generator Metadata"
+        },
+        "derivation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DerivationInput"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "split": {
+          "enum": [
+            "development",
+            "calibration",
+            "evaluation"
+          ],
+          "title": "Split",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "cluster_key",
+        "family_key",
+        "task",
+        "prompt",
+        "input_profile",
+        "output_profile",
+        "expected",
+        "usage",
+        "origin",
+        "source_uri",
+        "license",
+        "split"
+      ],
+      "title": "CaseInput",
+      "type": "object"
+    },
+    "DerivationInput": {
+      "additionalProperties": false,
+      "properties": {
+        "parent_key": {
+          "title": "Parent Key",
+          "type": "string"
+        },
+        "operator_version": {
+          "title": "Operator Version",
+          "type": "string"
+        },
+        "relation": {
+          "enum": [
+            "INVARIANT",
+            "DIRECTIONAL"
+          ],
+          "title": "Relation",
+          "type": "string"
+        },
+        "invariant": {
+          "minLength": 1,
+          "title": "Invariant",
+          "type": "string"
+        },
+        "parameters": {
+          "additionalProperties": true,
+          "title": "Parameters",
+          "type": "object"
+        }
+      },
+      "required": [
+        "parent_key",
+        "operator_version",
+        "relation",
+        "invariant"
+      ],
+      "title": "DerivationInput",
+      "type": "object"
+    },
+    "ExpectedContract": {
+      "additionalProperties": false,
+      "properties": {
+        "accepted_answers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Accepted Answers",
+          "type": "array"
+        },
+        "json_schema": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Json Schema"
+        },
+        "expected_fields": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Expected Fields"
+        },
+        "required_literals": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Required Literals",
+          "type": "array"
+        },
+        "max_characters": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Max Characters"
+        },
+        "answerable": {
+          "default": true,
+          "title": "Answerable",
+          "type": "boolean"
+        },
+        "abstention_answers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Abstention Answers",
+          "type": "array"
+        },
+        "semantic_units": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Semantic Units",
+          "type": "array"
+        }
+      },
+      "title": "ExpectedContract",
+      "type": "object"
+    },
+    "LanguageProfile": {
+      "additionalProperties": false,
+      "properties": {
+        "languages": {
+          "items": {
+            "enum": [
+              "en",
+              "ml"
+            ],
+            "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "title": "Languages",
+          "type": "array"
+        },
+        "script": {
+          "enum": [
+            "Latin",
+            "Malayalam",
+            "mixed"
+          ],
+          "title": "Script",
+          "type": "string"
+        },
+        "register": {
+          "default": "unspecified",
+          "enum": [
+            "formal",
+            "conversational",
+            "colloquial",
+            "unspecified"
+          ],
+          "title": "Register",
+          "type": "string"
+        },
+        "mixing": {
+          "default": "none",
+          "enum": [
+            "none",
+            "lexical",
+            "within_sentence",
+            "between_sentence",
+            "ambiguous"
+          ],
+          "title": "Mixing",
+          "type": "string"
+        },
+        "romanization": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Romanization"
+        }
+      },
+      "required": [
+        "languages",
+        "script"
+      ],
+      "title": "LanguageProfile",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "version": {
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "title": "Version",
+      "type": "string"
+    },
+    "cases": {
+      "items": {
+        "$ref": "#/$defs/CaseInput"
+      },
+      "maxItems": 1000,
+      "minItems": 1,
+      "title": "Cases",
+      "type": "array"
+    }
+  },
+  "required": [
+    "name",
+    "version",
+    "cases"
+  ],
+  "title": "BenchmarkImport",
+  "type": "object"
+}
